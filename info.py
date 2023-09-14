@@ -1,0 +1,30 @@
+API_SJ = "v3.r.137812245.2bfe7b18435c1066312b5556cd246e37caee23ea.ff35416b51d55ab71160edba1388929bbf723ab7"
+API_HH = "LEI8U4Q5EB4Q873AAQ4SBB3MA93K1IDH53HN0C5HP30STEA0IHFH0M1DJ4ANAAFL"
+
+
+{'canEdit': False, 'is_closed': False, 'id': 39818595, 'id_client': 3237849, 'payment_from': 15000, 'payment_to': 0,
+ 'date_pub_to': 1697005207, 'date_archived': 1689165002, 'date_published': 1694694306, 'address': None,
+ 'profession': 'Специалист службы поддержки с техническими знаниями / Волкер', 'work': None, 'compensation': None,
+ 'candidat': 'У нас есть сервисы, которые помогают не заблудиться в незнакомом районе....', 'metro': [],
+ 'currency': 'rub', 'vacancyRichText': '<p>У нас есть сервисы, которые ...', 'covid_vaccination_requirement': {'id': 1, 'title': 'Не важно'},
+ 'moveable': True, 'agreement': False, 'anonymous': False, 'is_archive': False, 'is_storage': False,
+ 'type_of_work': {'id': 14, 'title': 'Неполная дистанционная занятость'}, 'place_of_work': {'id': 2, 'title': 'Удалённая работа (на дому)'},
+ 'education': {'id': 3, 'title': 'Неполное высшее'}, 'experience': {'id': 0, 'title': 'Не имеет значения'},
+ 'maritalstatus': {'id': 0, 'title': 'Не имеет значения'}, 'children': {'id': 0, 'title': 'Не имеет значения'},
+ 'client': {'id': 3237849, 'title': 'Яндекс/ООО "ЯНДЕКС"',
+ 'link': 'https://www.superjob.ru/clients/yandeks-ooo-yandeks-3237849/vacancies.html',
+ 'industry': [], 'description': 'Поисковая система и интернет-портал.', 'vacancy_count': 394, 'staff_count': 'более 5000',
+ 'client_logo': 'https://public.superjob.ru/images/clients_logos.ru/3237849_daa40cb82b789026a6a0faa84128f2fd.jpg',
+ 'address': None, 'addresses': [], 'url': 'https://yandex.ru', 'short_reg': False, 'is_blocked': False, 'registered_date': 1499948707,
+ 'town': {'id': 4, 'title': 'Москва', 'declension': 'в Москве', 'hasMetro': True, 'genitive': 'Москвы'}}, 'languages': [],
+ 'driving_licence': [], 'catalogues': [{'id': 33, 'title': 'IT, Интернет, связь, телеком', 'key': 33,
+ 'positions': [{'id': 57, 'title': 'Техническая поддержка', 'key': 57}, {'id': 60, 'title': 'Другое', 'key': 60},
+{'id': 61, 'title': 'Начало карьеры, мало опыта', 'key': 61}, {'id': 503, 'title': 'Внедрение и сопровождение ПО', 'key': 503},
+{'id': 614, 'title': 'Техническая документация', 'key': 614}]}], 'agency': {'id': 1, 'title': 'прямой работодатель'},
+'town': {'id': 4, 'title': 'Москва', 'declension': 'в Москве', 'hasMetro': True, 'genitive': 'Москвы'},
+'already_sent_on_vacancy': False, 'rejected': False, 'response_info': [], 'phone': None, 'phones': None, 'fax': None,
+'faxes': None, 'client_logo': 'https://public.superjob.ru/images/clients_logos.ru/3237849_daa40cb82b789026a6a0faa84128f2fd.jpg',
+'highlight': False, 'age_from': 0, 'age_to': 0, 'gender': {'id': 0, 'title': 'Не имеет значения'}, 'firm_name': 'Яндекс',
+'firm_activity': 'Поисковая система и интернет-портал.',
+'link': 'https://www.superjob.ru/vakansii/specialist-sluzhby-podderzhki-s-tehnicheskimi-znaniyami-39818595.html',
+'latitude': None, 'longitude': None}
