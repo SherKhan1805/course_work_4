@@ -8,8 +8,13 @@ class Job(ABC):
     """
     Абстрактный класс
     """
+
     @abstractmethod
     def get_vacancies(self):
+        pass
+
+    @abstractmethod
+    def sorted_vacancies(self):
         pass
 
 
@@ -17,6 +22,7 @@ class SuperJobAPI(Job):
     """
     Класс для получения вакансий с SuperJob
     """
+
     def __init__(self, town, search_query):
         """
 
@@ -35,14 +41,12 @@ class SuperJobAPI(Job):
         endpoint = 'vacancies'
         headers = {'X-Api-App-Id': sj_api_key}
         params = {
-            'town': "Екатеринбург",
-            'keyword': "Уборщик",
-            # 'experience': 'no_experience',  # Опыт работы (no_experience, between1And3, moreThan6)
+            'town': self.town,
+            'keyword': self.search_query,
         }
         response = requests.get(f'{base_url}{endpoint}', headers=headers, params=params)
 
-        vacancy_dict = {}
-        vacancy_dict['people'] = []
+        vacancy_dict = {'vacancy': []}
 
         if response.status_code == 200:
             data = response.json()
@@ -51,35 +55,15 @@ class SuperJobAPI(Job):
                 payment_from = prof['payment_from']
                 payment_to = prof['payment_to']
                 profession = prof['profession']
-                education = prof['education']['title']
                 experience = prof['experience']['title']
                 town = prof['town']['title']
-                link = prof['link']
+                url = prof['link']
 
-                dict_ = {"payment_from": payment_from,"payment_to": payment_to, "profession": profession, "education": education, "experience": experience, "town": town, "link": link}
+                dict_vacancy = {"profession": profession, "town": town, "payment_from": payment_from,
+                                "payment_to": payment_to, "experience": experience, "url": url}
 
-                vacancy_dict['people'].append(dict_)
-
-            with open('super_job.json', 'w') as outfile:
-                json.dump(vacancy_dict, outfile)
-
-                # print(dict_)
-
-                # if payment_to == 0:
-                #     print(f"от {payment_from}")
-                # else:
-                #     print(f"от {payment_from} до {payment_to}")
-                # print(education)
-                # print(experience)
-                # print(town)
-                # print(f"{link}\n")
-
-
-                # break
-                # print(profession['profession'])
-
-            # print(vacancies)
-            # print(type(data))
+                vacancy_dict['vacancy'].append(dict_vacancy)
+            return vacancy_dict
 
         else:
             print('Ошибка при запросе данных:', response.status_code)
@@ -87,8 +71,8 @@ class SuperJobAPI(Job):
 
 class HeadHunterAPI(ABC):
     """
-        Класс для получения вакансий с HeadHunter
-        """
+    Класс для получения вакансий с HeadHunter
+    """
 
     def __init__(self, town, search_query):
         """
@@ -105,7 +89,6 @@ class HeadHunterAPI(ABC):
         Метод для получения вакансий по api
         в формате JSON
         """
-        hh_api_key: str = os.getenv('API_KEY_HH')
 
         base_url = 'https://api.hh.ru/'
         endpoint = 'vacancies'
@@ -124,23 +107,75 @@ class HeadHunterAPI(ABC):
 
         params = {'text': self.search_query, 'area': self.areas_id}
 
-        # Выполнение запроса
-        headers = {'Authorization': f'Bearer {hh_api_key}'}
-
         response = requests.get(f'{base_url}{endpoint}', params=params)
+
+        vacancy_dict = {'vacancy': []}
 
         if response.status_code == 200:
             data = response.json()
             vacancies = data['items']
-            print(vacancies)
+            for prof in vacancies:
 
-# """
-# HEADHUNTER
-# """
-#
-#
-# hh_api_key: str = os.getenv('API_KEY_HH')
-#
-# head_hunter = build('youtube', 'v3', developerKey=hh_api_key)
-#
-# print(super_job)
+                url = prof['alternate_url']
+
+                try:
+                    payment_to = prof['salary']['to']
+                    payment_from = prof['salary']['from']
+                except TypeError:
+                    payment_to = 0
+                    payment_from = 0
+
+                profession = prof['name']
+                town = prof['area']['name']
+                experience = prof['experience']['name']
+
+                dict_vacancy = {"profession": profession, "town": town, "payment_from": payment_from,
+                                "payment_to": payment_to, "experience": experience, "url": url}
+
+                vacancy_dict['vacancy'].append(dict_vacancy)
+            return vacancy_dict
+
+        else:
+            print('Ошибка при запросе данных:', response.status_code)
+
+
+class FileManager(ABC):
+    """
+    Класс для работы с файлами
+    """
+
+    @abstractmethod
+    def write(self, file):
+        """
+        Запись файла в json формат
+        """
+        pass
+
+    @abstractmethod
+    def read(self):
+        """
+        Чтение файла в json формате
+        """
+        pass
+
+
+class JSONFileManager(FileManager):
+
+    def __init__(self):
+        self.file = None
+
+    def write(self, file):
+        """
+        Запись файла в json формат
+        """
+        self.file = file
+        with open('vacancy.json', 'w') as outfile:
+            json.dump(self.file, outfile)
+
+    def read(self):
+        """
+        Чтение файла в json формате
+        """
+        with open('vacancy.json', 'r', encoding='utf8') as outfile:
+            read_file = json.load(outfile)
+            print(read_file)
